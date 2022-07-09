@@ -1,5 +1,4 @@
 import axios from "axios";
-import react from "react";
 import moment from "moment";
 
 const baseURL = "http://192.168.1.74:8080/betterBudget/v1";
@@ -31,17 +30,13 @@ async function postBudget(request) {
     })
   );
 
-  let from = new Date(request.budget.startDate);
-  console.log(`from date: ${from}`);
-  let from2 = moment(request.budget.startDate).format("YYYY-MM-DD").toString();
-  let to = new Date(request.budget.endDate);
-  let to2 = moment(request.budget.endDate).format("YYYY-MM-DD").toString();
-  console.log(`to date: ${to}`);
+  let from = moment(request.budget.startDate).format("YYYY-MM-DD").toString();
+  let to = moment(request.budget.endDate).format("YYYY-MM-DD").toString();
   const response = await axios
     .post(`${baseURL}/budget`, {
       budget: {
-        startDate: from2,
-        endDate: to2,
+        startDate: from,
+        endDate: to,
         budgetType: request.budget.budgetType,
       },
       expenses: expenses,
