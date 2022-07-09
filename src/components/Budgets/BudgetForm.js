@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import Moment from "moment";
 import { Button, Card, Col, Form, FormSelect, Row } from "react-bootstrap";
@@ -31,6 +32,7 @@ const BudgetForm = (props) => {
       accountType: "",
     },
   ]);
+  const navigate = useNavigate();
   let typeHolder;
   let startDtHolder;
 
@@ -148,9 +150,10 @@ const BudgetForm = (props) => {
       expenses: [...expenseData],
       accounts: [...accountData],
     };
-    console.log("request: " + request);
-    let response = budgetApi.postBudget(request);
-    console.log("response: " + response);
+
+    budgetApi.postBudget(request);
+
+    navigate("/budget");
   };
 
   const formChangeHandler = (e) => {
