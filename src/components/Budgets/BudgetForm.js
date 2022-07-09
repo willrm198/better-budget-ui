@@ -4,6 +4,7 @@ import Moment from "moment";
 import { Button, Card, Col, Form, FormSelect, Row } from "react-bootstrap";
 import Expenses from "../Expenses/Expenses.js";
 import Accounts from "../Accounts/Accounts.js";
+import { budgetApi } from "../Services/BudgetApi.js";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -23,6 +24,7 @@ const BudgetForm = (props) => {
   ]);
   const [accountData, setAccountData] = useState([
     {
+      index: Math.random(),
       accountName: "",
       accountLimit: "",
       accountBalance: "",
@@ -45,16 +47,16 @@ const BudgetForm = (props) => {
     let type = getType();
     let end;
     switch (type) {
-      case "Daily":
+      case "DAILY":
         end = addDays(start, 1);
         break;
-      case "Bi-Weekly":
+      case "BI_WEEKLY":
         end = addDays(start, 14);
         break;
-      case "Monthly":
+      case "MONTHLY":
         end = addDays(start, 28);
         break;
-      case "Yearly":
+      case "YEARLY":
         end = addDays(start, 365);
         break;
       default:
@@ -136,6 +138,7 @@ const BudgetForm = (props) => {
   };
 
   const formSubmissionHandler = (event) => {
+    event.preventDefault();
     let request = {
       budget: {
         startDate: displayFrom,
@@ -146,6 +149,8 @@ const BudgetForm = (props) => {
       accounts: [...accountData],
     };
     console.log("request: " + request);
+    let response = budgetApi.postBudget(request);
+    console.log("response: " + response);
   };
 
   const formChangeHandler = (e) => {
@@ -162,9 +167,6 @@ const BudgetForm = (props) => {
       let accounts = [...accountData];
       accounts[e.target.dataset.id][e.target.name] = e.target.value;
     }
-    //  else {
-    //   setExpenseData({ [e.target.name]: e.target.value });
-    // }
   };
 
   let expenseList = expenseData;
@@ -201,10 +203,10 @@ const BudgetForm = (props) => {
                   onChange={onTypeChange}
                   defaultValue="Bi-Weekly"
                 >
-                  <option>Daily</option>
-                  <option>Bi-Weekly</option>
-                  <option>Monthly</option>
-                  <option>Yearly</option>
+                  <option value="DAILY">Daily</option>
+                  <option value="BI_WEEKLY">Bi-Weekly</option>
+                  <option value="MONTHLY">Monthly</option>
+                  <option value="YEARLY">Yearly</option>
                 </FormSelect>
               </div>
             </Col>
