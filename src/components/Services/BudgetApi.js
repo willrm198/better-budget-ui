@@ -21,7 +21,7 @@ async function postBudget(request) {
       accountName: name,
       accountLimit: limitAmount,
       accountBalance: balance,
-      accountType: accountType,
+      accountType,
     }) => ({
       name,
       limitAmount,
@@ -46,9 +46,119 @@ async function postBudget(request) {
     .catch(function (error) {
       console.log(error);
     });
+  return response.data;
+}
+
+async function postAccount(request) {
+  const response = await axios
+    .post(`${baseURL}/account`, request)
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function postExpense(request) {
+  const response = await axios
+    .post(`${baseURL}/expense`, request)
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function postTransaction(request) {
+  const response = await axios
+    .post(`${baseURL}/transaction`, request)
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function getBudgets() {
+  const response = await axios
+    .get(`${baseURL}/budgets`)
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function getBudgetById(id) {
+  const response = await axios
+    .get(`${baseURL}/budget?id=${id}`)
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function updateAccount(request) {
+  const response = await axios
+    .put(`${baseURL}/account`, request)
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function updateExpense(request) {
+  const response = await axios
+    .put(`${baseURL}/expense`, request)
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function updateTransaction(request) {
+  const response = await axios
+    .put(`${baseURL}/transaction`, request)
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function deleteAccount(id) {
+  const response = await axios
+    .delete(`${baseURL}/account`, { params: { id: id } })
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function deleteExpense(id) {
+  const response = await axios
+    .delete(`${baseURL}/expense`, { params: { id: id } })
+    .catch(function (error) {
+      console.log(error);
+    });
+  return response;
+}
+
+async function deleteTransaction(id) {
+  const response = await axios
+    .delete(`${baseURL}/transaction`, { params: { id: id } })
+    .catch(function (error) {
+      console.log(error);
+    });
   return response;
 }
 
 export const budgetApi = {
+  getBudgets,
+  getBudgetById,
+  postAccount,
   postBudget,
+  postExpense,
+  postTransaction,
+  updateAccount,
+  updateExpense,
+  updateTransaction,
+  deleteAccount,
+  deleteExpense,
+  deleteTransaction,
 };

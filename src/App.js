@@ -16,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/createBudget" element={<BudgetForm />} />
         <Route path="/myBudgets" element={<BudgetsList />} />
-        <Route path="/budget" element={<Budget />} />
+        <Route path="/budget/:id" element={<Budget />} />
       </Routes>
     </Router>
   );
