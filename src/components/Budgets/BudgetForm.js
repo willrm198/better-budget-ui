@@ -116,8 +116,8 @@ const BudgetForm = (props) => {
     });
   };
 
-  const onAccountDeleteHandler = (index) => {
-    setAccountData(accountData.filter((acc) => acc.index !== index.index));
+  const onAccountDeleteHandler = (account) => {
+    setAccountData(accountData.filter((acc) => acc.index !== account.index));
   };
 
   const addAccountHandler = (e) => {
@@ -135,8 +135,8 @@ const BudgetForm = (props) => {
     });
   };
 
-  const onExpenseDeleteHandler = (index) => {
-    setExpenseData(expenseData.filter((exp) => exp.index !== index.index));
+  const onExpenseDeleteHandler = (expense) => {
+    setExpenseData(expenseData.filter((exp) => exp.index !== expense.index));
   };
 
   const formSubmissionHandler = (event) => {
